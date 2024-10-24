@@ -1,4 +1,7 @@
-﻿namespace Project
+﻿using System.Security.Cryptography;
+using System.Text;
+
+namespace Project
 {
     public partial class Form1 : Form
     {
@@ -238,7 +241,7 @@
             newThread1.Start();
             newThread1.IsBackground = true;
         }
-        
+
         private void updateMatrix2(string matrix)
         {
             int i = 1;
@@ -314,7 +317,233 @@
                 cb_encypt.Checked = true;
             }
         }
-    //Phần RSA
+        //Phần RSA
+        private void cb_en_rsa_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_en_rsa.Checked)
+            {
+                btn_en_de_rsa.Text = "Encrypt";
+                label3.Text = "Enter plaintext";
+                label7.Text = "Cyphertext";
+                d_number.Enabled = false;
+                n_number.Enabled = false;
+                e_number.Enabled = false;
+                p_number.Enabled = false;
+                q_number.Enabled = false;
+                phin_number.Enabled = false;
+                key_generation.Visible = true;
+                cb_de_rsa.Checked = false;
+                tb_plaintext_rsa.Visible = true;
+                tb_cyphertext_rsa2.Visible = true;
+                tb_cyphertext_rsa.Visible = false;
+                tb_phaintext_rsa2.Visible = false;
+            }
+            else
+            {
+                cb_de_rsa.Checked = true;
+            }
+        }
 
+        private void cd_de_rsa_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_de_rsa.Checked)
+            {
+                btn_en_de_rsa.Text = "Decrypt";
+                label3.Text = "Enter Cyphertext";
+                label7.Text = "Plaintext";
+                d_number.Enabled = true;
+                n_number.Enabled = true;
+                e_number.Enabled = false;
+                p_number.Enabled = false;
+                q_number.Enabled = false;
+                phin_number.Enabled = false;
+                key_generation.Visible = false;
+                cb_en_rsa.Checked = false;
+                tb_cyphertext_rsa.Visible = true;
+                tb_phaintext_rsa2.Visible = true;
+                tb_plaintext_rsa.Visible = false;
+                tb_cyphertext_rsa2.Visible = false;
+            }
+            else
+            {
+                cb_en_rsa.Checked = true;
+            }
+        }
+        private long pow(long a, int x, int p)
+        {
+            long result = 1;
+            a = a % p;
+            while (x > 0)
+            {
+                if (x % 2 == 1)
+                {
+                    result = (result * a) % p;
+                }
+                x /= 2;
+                a = (a * a) % p;
+            }
+            return result;
+        }
+        private int generateRandomNumber(int bitlentgh)
+        {
+            int byteLength = (bitlentgh + 7) / 8;
+            byte[] randomBytes = new byte[byteLength];
+
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomBytes);
+            }
+            return BitConverter.ToInt16(randomBytes, 0);
+        }
+        private bool isPrime(int prime)
+        {
+            if (prime <= 1) return false;
+            if (prime <= 3) return true;
+            if (prime % 2 == 0) return false;
+
+            int r = 0;
+            int d = prime - 1;
+
+            while (d % 2 == 0)
+            {
+                r++;
+                d /= 2;
+            }
+            Random random = new Random();
+            for (int i = 0; i < 5; i++)
+            {
+                int a = random.Next(2, prime - 2);
+                long x = pow(a, d, prime);
+                if (x == 1 || x == prime - 1)
+                {
+                    continue;
+                }
+                for (int j = 0; j < r; j++)
+                {
+                    x = pow(x, 2, prime);
+                    if (x == prime - 1)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        private (long gcd, long x, long y) extended_gcd (long a, long b)
+        {
+            if (a == 0)
+            {
+                return (b, 0, 1);
+            }
+
+            var result = extended_gcd(b % a, a);
+            long gcd = result.gcd;
+            long x1 = result.x;
+            long y1 = result.y;
+
+            long x = y1 - (b / a) * x1;
+            long y = x1;
+
+            return (gcd, x, y);
+        }
+        private long modInverse(int e, long phiN)
+        {
+            var result = extended_gcd(e, phiN);
+            long gcd = result.gcd;
+            long x = result.x;
+
+            if (gcd != 1)
+            {
+                return -1; 
+            }
+            else
+            {
+                return (x % phiN + phiN) % phiN; 
+            }
+        }
+        private string DecimalToBase64(int decimalNumber)
+        {
+            byte[] byteArray = BitConverter.GetBytes(decimalNumber);
+            string base64String = Convert.ToBase64String(byteArray);
+            return base64String;
+        } 
+        private void btn_en_de_rsa_Click(object sender, EventArgs e)
+        {
+            if (cb_en_rsa.Checked)
+            {
+                string plaintext = tb_plaintext_rsa.Text.Trim();
+                int so_e = Int32.Parse(e_number.Text.Trim());
+                int n = Int32.Parse(n_number.Text.Trim());
+                string cyphertext = "";
+                foreach (var item in plaintext)
+                {
+                    long c = pow((int)item, so_e, n);
+                    string hexString = c.ToString("X8");
+                    //cyphertext += DecimalToBase64(c);
+                    cyphertext += hexString + " ";
+                }
+                tb_cyphertext_rsa2.Text = cyphertext;
+            }
+            else if (cb_de_rsa.Checked)
+            {
+                string cyphertextString = tb_cyphertext_rsa.Text.Trim();
+                int d = Int32.Parse(d_number.Text.Trim());
+                int n = Int32.Parse(n_number.Text.Trim());
+                string plaintext = "";
+                string[] cyphertextArray = cyphertextString.Split(' ');
+                foreach (var item in cyphertextArray)
+                {
+                    long c = pow(Convert.ToInt32(item,16), d, n);
+                    char temp = Convert.ToChar(c);
+                    //cyphertext += DecimalToBase64(c);
+                    plaintext += temp + "";
+                }
+                tb_phaintext_rsa2.Text = plaintext;
+            }
+        }
+
+        private void key_generation_Click(object sender, EventArgs e)
+        {
+            int p, q, so_e;
+            while (true)
+            {
+                p = generateRandomNumber(16);
+                if (isPrime(p))
+                {
+                    break;
+                }
+            }
+            while (true)
+            {
+                q = generateRandomNumber(16);
+                if (isPrime(q))
+                {
+                    break;
+                }
+            }
+            while (true)
+            {
+                so_e = generateRandomNumber(16);
+                if (isPrime(so_e))
+                {
+                    break;
+                }
+            }
+            long n = p * q;
+            long phiN = (p-1) * (q-1);
+            long d = modInverse(so_e, phiN);
+            if (d == -1) return;
+
+            p_number.Text = p.ToString();
+            q_number.Text = q.ToString();
+            e_number.Text = so_e.ToString();
+            n_number.Text = n.ToString();
+            d_number.Text = d.ToString();
+            phin_number.Text = phiN.ToString();
+        }
     }
 }

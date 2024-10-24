@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            tb = new TextBox();
+            tb_cyphertext_rsa2 = new TextBox();
             panel6 = new Panel();
             label7 = new Label();
             label1 = new Label();
@@ -69,13 +69,21 @@
             label5 = new Label();
             panel2 = new Panel();
             Playfair = new TabPage();
+            panel8 = new Panel();
+            tb_plaintext1 = new TextBox();
+            panel5 = new Panel();
+            tb_cypher_text = new TextBox();
             panel1 = new Panel();
             cb_decrypt = new CheckBox();
             cb_encypt = new CheckBox();
             tabControl1 = new TabControl();
             RSA = new TabPage();
+            tb_phaintext_rsa2 = new TextBox();
             panel4 = new Panel();
-            cd_de_rsa = new CheckBox();
+            panel9 = new Panel();
+            tb_cyphertext_rsa = new TextBox();
+            tb_plaintext_rsa = new TextBox();
+            cb_de_rsa = new CheckBox();
             cb_en_rsa = new CheckBox();
             label10 = new Label();
             phin_number = new TextBox();
@@ -84,41 +92,37 @@
             label12 = new Label();
             p_number = new TextBox();
             label3 = new Label();
-            textBox1 = new TextBox();
             key_generation = new Button();
-            btn_en_de = new Button();
+            btn_en_de_rsa = new Button();
             label4 = new Label();
             d_number = new TextBox();
             label8 = new Label();
             e_number = new TextBox();
             label9 = new Label();
             n_number = new TextBox();
-            tb_plaintext1 = new TextBox();
-            panel5 = new Panel();
-            panel8 = new Panel();
-            tb_cypher_text = new TextBox();
             panel6.SuspendLayout();
             panel3.SuspendLayout();
             panel7.SuspendLayout();
             panel2.SuspendLayout();
             Playfair.SuspendLayout();
+            panel8.SuspendLayout();
+            panel5.SuspendLayout();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             RSA.SuspendLayout();
             panel4.SuspendLayout();
-            panel5.SuspendLayout();
-            panel8.SuspendLayout();
+            panel9.SuspendLayout();
             SuspendLayout();
             // 
-            // tb
+            // tb_cyphertext_rsa2
             // 
-            tb.Dock = DockStyle.Fill;
-            tb.Location = new Point(573, 31);
-            tb.Multiline = true;
-            tb.Name = "tb";
-            tb.ScrollBars = ScrollBars.Vertical;
-            tb.Size = new Size(369, 476);
-            tb.TabIndex = 5;
+            tb_cyphertext_rsa2.Dock = DockStyle.Fill;
+            tb_cyphertext_rsa2.Location = new Point(573, 31);
+            tb_cyphertext_rsa2.Multiline = true;
+            tb_cyphertext_rsa2.Name = "tb_cyphertext_rsa2";
+            tb_cyphertext_rsa2.ScrollBars = ScrollBars.Vertical;
+            tb_cyphertext_rsa2.Size = new Size(369, 476);
+            tb_cyphertext_rsa2.TabIndex = 5;
             // 
             // panel6
             // 
@@ -133,7 +137,7 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label7.Location = new Point(120, 4);
+            label7.Location = new Point(125, 4);
             label7.Name = "label7";
             label7.Size = new Size(125, 21);
             label7.TabIndex = 1;
@@ -525,6 +529,49 @@
             Playfair.Text = "Playfair";
             Playfair.UseVisualStyleBackColor = true;
             // 
+            // panel8
+            // 
+            panel8.Controls.Add(tb_plaintext1);
+            panel8.Controls.Add(tb_cyphertext);
+            panel8.Dock = DockStyle.Fill;
+            panel8.Location = new Point(332, 281);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(610, 226);
+            panel8.TabIndex = 12;
+            // 
+            // tb_plaintext1
+            // 
+            tb_plaintext1.Dock = DockStyle.Fill;
+            tb_plaintext1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tb_plaintext1.Location = new Point(0, 0);
+            tb_plaintext1.Multiline = true;
+            tb_plaintext1.Name = "tb_plaintext1";
+            tb_plaintext1.ReadOnly = true;
+            tb_plaintext1.ScrollBars = ScrollBars.Vertical;
+            tb_plaintext1.Size = new Size(610, 226);
+            tb_plaintext1.TabIndex = 10;
+            tb_plaintext1.Visible = false;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(tb_cypher_text);
+            panel5.Controls.Add(tb_plaintext);
+            panel5.Dock = DockStyle.Top;
+            panel5.Location = new Point(332, 32);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(610, 221);
+            panel5.TabIndex = 11;
+            // 
+            // tb_cypher_text
+            // 
+            tb_cypher_text.Dock = DockStyle.Fill;
+            tb_cypher_text.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tb_cypher_text.Location = new Point(0, 0);
+            tb_cypher_text.Multiline = true;
+            tb_cypher_text.Name = "tb_cypher_text";
+            tb_cypher_text.Size = new Size(610, 221);
+            tb_cypher_text.TabIndex = 8;
+            // 
             // panel1
             // 
             panel1.Controls.Add(cb_decrypt);
@@ -578,7 +625,8 @@
             // 
             // RSA
             // 
-            RSA.Controls.Add(tb);
+            RSA.Controls.Add(tb_phaintext_rsa2);
+            RSA.Controls.Add(tb_cyphertext_rsa2);
             RSA.Controls.Add(panel6);
             RSA.Controls.Add(panel4);
             RSA.Location = new Point(4, 24);
@@ -589,9 +637,20 @@
             RSA.Text = "RSA";
             RSA.UseVisualStyleBackColor = true;
             // 
+            // tb_phaintext_rsa2
+            // 
+            tb_phaintext_rsa2.Dock = DockStyle.Fill;
+            tb_phaintext_rsa2.Location = new Point(573, 31);
+            tb_phaintext_rsa2.Multiline = true;
+            tb_phaintext_rsa2.Name = "tb_phaintext_rsa2";
+            tb_phaintext_rsa2.ScrollBars = ScrollBars.Vertical;
+            tb_phaintext_rsa2.Size = new Size(369, 476);
+            tb_phaintext_rsa2.TabIndex = 6;
+            // 
             // panel4
             // 
-            panel4.Controls.Add(cd_de_rsa);
+            panel4.Controls.Add(panel9);
+            panel4.Controls.Add(cb_de_rsa);
             panel4.Controls.Add(cb_en_rsa);
             panel4.Controls.Add(label10);
             panel4.Controls.Add(phin_number);
@@ -600,9 +659,8 @@
             panel4.Controls.Add(label12);
             panel4.Controls.Add(p_number);
             panel4.Controls.Add(label3);
-            panel4.Controls.Add(textBox1);
             panel4.Controls.Add(key_generation);
-            panel4.Controls.Add(btn_en_de);
+            panel4.Controls.Add(btn_en_de_rsa);
             panel4.Controls.Add(label4);
             panel4.Controls.Add(d_number);
             panel4.Controls.Add(label8);
@@ -615,16 +673,49 @@
             panel4.Size = new Size(570, 504);
             panel4.TabIndex = 0;
             // 
-            // cd_de_rsa
+            // panel9
             // 
-            cd_de_rsa.AutoSize = true;
-            cd_de_rsa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            cd_de_rsa.Location = new Point(161, 25);
-            cd_de_rsa.Name = "cd_de_rsa";
-            cd_de_rsa.Size = new Size(83, 25);
-            cd_de_rsa.TabIndex = 33;
-            cd_de_rsa.Text = "Decrypt";
-            cd_de_rsa.UseVisualStyleBackColor = true;
+            panel9.Controls.Add(tb_cyphertext_rsa);
+            panel9.Controls.Add(tb_plaintext_rsa);
+            panel9.Dock = DockStyle.Bottom;
+            panel9.Location = new Point(0, 246);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(570, 258);
+            panel9.TabIndex = 34;
+            // 
+            // tb_cyphertext_rsa
+            // 
+            tb_cyphertext_rsa.Dock = DockStyle.Fill;
+            tb_cyphertext_rsa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tb_cyphertext_rsa.Location = new Point(0, 0);
+            tb_cyphertext_rsa.Multiline = true;
+            tb_cyphertext_rsa.Name = "tb_cyphertext_rsa";
+            tb_cyphertext_rsa.ScrollBars = ScrollBars.Vertical;
+            tb_cyphertext_rsa.Size = new Size(570, 258);
+            tb_cyphertext_rsa.TabIndex = 25;
+            // 
+            // tb_plaintext_rsa
+            // 
+            tb_plaintext_rsa.Dock = DockStyle.Fill;
+            tb_plaintext_rsa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            tb_plaintext_rsa.Location = new Point(0, 0);
+            tb_plaintext_rsa.Multiline = true;
+            tb_plaintext_rsa.Name = "tb_plaintext_rsa";
+            tb_plaintext_rsa.ScrollBars = ScrollBars.Vertical;
+            tb_plaintext_rsa.Size = new Size(570, 258);
+            tb_plaintext_rsa.TabIndex = 24;
+            // 
+            // cb_de_rsa
+            // 
+            cb_de_rsa.AutoSize = true;
+            cb_de_rsa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cb_de_rsa.Location = new Point(161, 25);
+            cb_de_rsa.Name = "cb_de_rsa";
+            cb_de_rsa.Size = new Size(83, 25);
+            cb_de_rsa.TabIndex = 33;
+            cb_de_rsa.Text = "Decrypt";
+            cb_de_rsa.UseVisualStyleBackColor = true;
+            cb_de_rsa.CheckedChanged += cd_de_rsa_CheckedChanged;
             // 
             // cb_en_rsa
             // 
@@ -636,6 +727,7 @@
             cb_en_rsa.TabIndex = 32;
             cb_en_rsa.Text = "Encrypt";
             cb_en_rsa.UseVisualStyleBackColor = true;
+            cb_en_rsa.CheckedChanged += cb_en_rsa_CheckedChanged;
             // 
             // label10
             // 
@@ -655,6 +747,7 @@
             phin_number.ReadOnly = true;
             phin_number.Size = new Size(150, 29);
             phin_number.TabIndex = 30;
+            phin_number.TextAlign = HorizontalAlignment.Center;
             // 
             // label11
             // 
@@ -674,6 +767,7 @@
             q_number.ReadOnly = true;
             q_number.Size = new Size(150, 29);
             q_number.TabIndex = 28;
+            q_number.TextAlign = HorizontalAlignment.Center;
             // 
             // label12
             // 
@@ -699,22 +793,11 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(22, 222);
+            label3.Location = new Point(25, 222);
             label3.Name = "label3";
             label3.Size = new Size(69, 21);
             label3.TabIndex = 25;
             label3.Text = "Plaintext";
-            // 
-            // textBox1
-            // 
-            textBox1.Dock = DockStyle.Bottom;
-            textBox1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox1.Location = new Point(0, 246);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.ScrollBars = ScrollBars.Vertical;
-            textBox1.Size = new Size(570, 258);
-            textBox1.TabIndex = 24;
             // 
             // key_generation
             // 
@@ -725,16 +808,18 @@
             key_generation.TabIndex = 23;
             key_generation.Text = "Key Generation";
             key_generation.UseVisualStyleBackColor = true;
+            key_generation.Click += key_generation_Click;
             // 
-            // btn_en_de
+            // btn_en_de_rsa
             // 
-            btn_en_de.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btn_en_de.Location = new Point(432, 187);
-            btn_en_de.Name = "btn_en_de";
-            btn_en_de.Size = new Size(126, 48);
-            btn_en_de.TabIndex = 22;
-            btn_en_de.Text = "Encrypt";
-            btn_en_de.UseVisualStyleBackColor = true;
+            btn_en_de_rsa.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btn_en_de_rsa.Location = new Point(432, 187);
+            btn_en_de_rsa.Name = "btn_en_de_rsa";
+            btn_en_de_rsa.Size = new Size(126, 48);
+            btn_en_de_rsa.TabIndex = 22;
+            btn_en_de_rsa.Text = "Encrypt";
+            btn_en_de_rsa.UseVisualStyleBackColor = true;
+            btn_en_de_rsa.Click += btn_en_de_rsa_Click;
             // 
             // label4
             // 
@@ -754,6 +839,7 @@
             d_number.ReadOnly = true;
             d_number.Size = new Size(150, 29);
             d_number.TabIndex = 19;
+            d_number.TextAlign = HorizontalAlignment.Center;
             // 
             // label8
             // 
@@ -773,6 +859,7 @@
             e_number.ReadOnly = true;
             e_number.Size = new Size(150, 29);
             e_number.TabIndex = 17;
+            e_number.TextAlign = HorizontalAlignment.Center;
             // 
             // label9
             // 
@@ -792,48 +879,7 @@
             n_number.ReadOnly = true;
             n_number.Size = new Size(150, 29);
             n_number.TabIndex = 15;
-            // 
-            // tb_plaintext1
-            // 
-            tb_plaintext1.Dock = DockStyle.Fill;
-            tb_plaintext1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            tb_plaintext1.Location = new Point(0, 0);
-            tb_plaintext1.Multiline = true;
-            tb_plaintext1.Name = "tb_plaintext1";
-            tb_plaintext1.ReadOnly = true;
-            tb_plaintext1.ScrollBars = ScrollBars.Vertical;
-            tb_plaintext1.Size = new Size(610, 226);
-            tb_plaintext1.TabIndex = 10;
-            tb_plaintext1.Visible = false;
-            // 
-            // panel5
-            // 
-            panel5.Controls.Add(tb_cypher_text);
-            panel5.Controls.Add(tb_plaintext);
-            panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(332, 32);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(610, 221);
-            panel5.TabIndex = 11;
-            // 
-            // panel8
-            // 
-            panel8.Controls.Add(tb_plaintext1);
-            panel8.Controls.Add(tb_cyphertext);
-            panel8.Dock = DockStyle.Fill;
-            panel8.Location = new Point(332, 281);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(610, 226);
-            panel8.TabIndex = 12;
-            // 
-            // tb_cypher_text
-            // 
-            tb_cypher_text.Dock = DockStyle.Fill;
-            tb_cypher_text.Location = new Point(0, 0);
-            tb_cypher_text.Multiline = true;
-            tb_cypher_text.Name = "tb_cypher_text";
-            tb_cypher_text.Size = new Size(610, 221);
-            tb_cypher_text.TabIndex = 8;
+            n_number.TextAlign = HorizontalAlignment.Center;
             // 
             // Form1
             // 
@@ -852,6 +898,10 @@
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             Playfair.ResumeLayout(false);
+            panel8.ResumeLayout(false);
+            panel8.PerformLayout();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             tabControl1.ResumeLayout(false);
@@ -859,15 +909,13 @@
             RSA.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            panel8.ResumeLayout(false);
-            panel8.PerformLayout();
+            panel9.ResumeLayout(false);
+            panel9.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
-        private TextBox tb;
+        private TextBox tb_cyphertext_rsa2;
         private Panel panel6;
         private Label label7;
         private Label label1;
@@ -915,9 +963,9 @@
         private CheckBox cb_decrypt;
         private Panel panel4;
         private Label label3;
-        private TextBox textBox1;
+        private TextBox tb_plaintext_rsa;
         private Button key_generation;
-        private Button btn_en_de;
+        private Button btn_en_de_rsa;
         private Label label4;
         private TextBox d_number;
         private Label label8;
@@ -930,11 +978,14 @@
         private TextBox q_number;
         private Label label12;
         private TextBox p_number;
-        private CheckBox cd_de_rsa;
+        private CheckBox cb_de_rsa;
         private CheckBox cb_en_rsa;
         private TextBox tb_plaintext1;
         private Panel panel8;
         private Panel panel5;
         private TextBox tb_cypher_text;
+        private Panel panel9;
+        private TextBox tb_cyphertext_rsa;
+        private TextBox tb_phaintext_rsa2;
     }
 }
